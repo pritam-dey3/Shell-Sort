@@ -18,7 +18,7 @@ random_sample = sample(1:10000)
 avg(c("SE86", "TO92", "CI01"))
 
 sort_plot <- function(n=4000, r1=20, r2=5, funcs = c("SE86", "TO92", "CI01")){
-  k = floor(log2(n)) + 1
+  k = floor(log(n, 5)) + 1
   itr <- sapply(7:k, function (x) 2^x)
   y <- numeric(length(funcs))
   names(y) <- funcs
