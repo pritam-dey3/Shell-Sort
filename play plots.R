@@ -6,7 +6,7 @@ avg <- function(funcs = list(), r=20, l = 100){
   for (i in 1:r) {
     s = sample(1:l)
     fns = lapply(funcs, function(x) call(x, s))
-    ts = microbenchmark(list = fns, unit = "us")
+    ts = microbenchmark(list = fns, unit = "us", times = 20L)
     y <- rbind(y, 
       summary(ts)[["mean"]]
     )
@@ -26,6 +26,7 @@ sort_plot <- function(n=4000, funcs = c("SE86", "TO92", "CI01")){
     y <- rbind(y, 
       avg(funcs, l=i)
       )
+    print(i)
   }
   
   D = as.data.frame(cbind(y[-1, ], itr))
