@@ -1,12 +1,12 @@
 #practise plots
 
-avg <- function(funcs = list(), r=20, l = 100){
+avg <- function(funcs = list(), r1=20, r2=20, l = 100){
   y <- numeric(length(funcs))
   names(y) <- funcs
-  for (i in 1:r) {
+  for (i in 1:r1) {
     s = sample(1:l)
     fns = lapply(funcs, function(x) call(x, s))
-    ts = microbenchmark(list = fns, unit = "us", times = 20L)
+    ts = microbenchmark(list = fns, unit = "us", times = r2)
     y <- rbind(y, 
       summary(ts)[["mean"]]
     )
@@ -17,14 +17,14 @@ avg <- function(funcs = list(), r=20, l = 100){
 random_sample = sample(1:10000)
 avg(c("SE86", "TO92", "CI01"))
 
-sort_plot <- function(n=4000, funcs = c("SE86", "TO92", "CI01")){
+sort_plot <- function(n=4000, r1=20, r2=5, funcs = c("SE86", "TO92", "CI01")){
   k = floor(log2(n)) + 1
   itr <- sapply(7:k, function (x) 2^x)
   y <- numeric(length(funcs))
   names(y) <- funcs
   for (i in itr) {
     y <- rbind(y, 
-      avg(funcs, l=i)
+      avg(funcs, r1, r2, l=i)
       )
     print(i)
   }
@@ -44,9 +44,9 @@ sort_plot <- function(n=4000, funcs = c("SE86", "TO92", "CI01")){
 }
 
 
-sort_plot(n = 4000, funcs = c("QuickSortL", "QuickSortH", "RQsort"))
+sort_plot(n = 8000, funcs = c("QuickSortH_WC", "RQsort"))
 
 RQsort <- function(x) sort(x, method="quick")
-
+avg()
 
 f <- function(x) x+2
