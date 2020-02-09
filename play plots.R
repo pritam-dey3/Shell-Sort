@@ -38,17 +38,17 @@ sort_plot <- function(n=4000, r1=20, r2=5, funcs = c("SE86", "TO92", "CI01")){
       collapse="+"),
     "~itr")
   
-  write.csv(df, "data.csv")
+  write.csv(D, "data.csv")
   
   xyplot(as.formula(frml), data = D, 
          type=c('p', 'l'),
          auto.key = TRUE,
-         scales = list(x=list(log = 2))
+         scales = list(x=list(log = 5))
   )
 }
 
 
-sort_plot(n = 8000, funcs = c("QuickSortH_WC", "RQsort"))
+sort_plot(n = 2000, funcs = c("QuickSortH_WC", "RQsort"))
 
 RQsort <- function(x) sort(x, method="quick")
 avg()

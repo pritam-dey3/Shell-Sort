@@ -5,7 +5,7 @@ using namespace Rcpp;
 
 int partition(NumericVector a,int start,int end)
 {
-	int pivot = a[end];
+	double pivot = a[end];
 	int i = start - 1;
 	int j = end + 1;
 	//Rcout << a <<"\n";
