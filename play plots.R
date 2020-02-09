@@ -1,4 +1,6 @@
 #practise plots
+library(lattice)
+library(microbenchmark)
 
 avg <- function(funcs = list(), r1=20, r2=20, l = 100){
   y <- numeric(length(funcs))
@@ -19,7 +21,7 @@ avg(c("SE86", "TO92", "CI01"))
 
 sort_plot <- function(n=4000, r1=20, r2=5, funcs = c("SE86", "TO92", "CI01")){
   k = floor(log(n, 5)) + 1
-  itr <- sapply(7:k, function (x) 2^x)
+  itr <- sapply(3:k, function (x) 5^x)
   y <- numeric(length(funcs))
   names(y) <- funcs
   for (i in itr) {
@@ -35,6 +37,8 @@ sort_plot <- function(n=4000, r1=20, r2=5, funcs = c("SE86", "TO92", "CI01")){
       names(D)[-dim(D)[2]], 
       collapse="+"),
     "~itr")
+  
+  write.csv(df, "data.csv")
   
   xyplot(as.formula(frml), data = D, 
          type=c('p', 'l'),
