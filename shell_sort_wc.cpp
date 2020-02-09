@@ -6,7 +6,6 @@ NumericVector ShellSort(NumericVector arr, NumericVector Gaps) {
   
   int gap, j, i;
   int n = arr.size();
-  Special special;
   
   for(int t = Gaps.size()-1; t >= 0; t--) {
     gap = Gaps[t]; 
@@ -21,9 +20,6 @@ NumericVector ShellSort(NumericVector arr, NumericVector Gaps) {
       arr[i+gap] = key;
     }
   }
-  NumericVector res(2);
-  res[0] = special.nswap;
-  res[1] = special.ncomp;
-  Rcout << arr << "\n";
-  return res;
+  //Rcout << arr << "\n";
+  return 1;
 }

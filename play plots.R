@@ -16,9 +16,6 @@ avg <- function(funcs = list(), r1=20, r2=20, l = 100){
   colMeans(y[-1,])
 }
 
-random_sample = sample(1:10000)
-avg(c("SE86", "TO92", "CI01"))
-
 sort_plot <- function(k1=3, k2=5, r1=20, r2=5, funcs = c("SE86", "TO92", "CI01")){
   itr <- sapply(k1:k2, function (x) 5^x)
   y <- numeric(length(funcs))
