@@ -5,7 +5,7 @@ using namespace Rcpp;
 
 int partition(NumericVector a,int start,int end)
 {
-	double pivot = a[end];
+	double pivot = a[start];
 	int i = start - 1;
 	int j = end + 1;
 	//Rcout << a <<"\n";
@@ -19,7 +19,7 @@ int partition(NumericVector a,int start,int end)
 			j--;
 		} while (pivot < a[j]);
 
-		if(i > j)
+		if(i >= j)
 			return j;
 
 		//special.Swap(a, i, j);
