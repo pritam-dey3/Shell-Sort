@@ -37,7 +37,7 @@ sort_plot <- function(k1=3, k2=5, r1=20, r2=5, funcs = c("SE86", "TO92", "CI01")
       collapse="+"),
     "~itr")
   
-  write.csv(D, sprintf("data/data-%d-%d.csv", k1, k2))
+  write.csv(D, sprintf("data/time-%s-%d-%d.csv", paste(funcs, collapse = "+"), k1, k2))
   
   xyplot(as.formula(frml), data = D, 
          type=c('p', 'l'),
