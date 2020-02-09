@@ -26,3 +26,15 @@ CI01 <- function(s){
   }
   ShellSort(s, Gaps = gap)
 }
+
+GB91 <- function(s) {
+  gap <- numeric(0)
+  N = length(s)
+  a = max(floor(5*N/11), 1)
+  while(a > 1){
+    gap = c(a, gap)
+    a = max(floor(5*a/11), 1)
+  }
+  gap = c(1, gap)
+  ShellSort(s, Gaps = gap)
+}
