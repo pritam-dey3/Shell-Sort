@@ -47,5 +47,5 @@ sort_plot1 <- function(seqn, r1=20, funcs = c("SE86", "TO92", "CI01")){
 }
 
 seqn = seq(from=2, to=6, length=15)
-sort_plot1(seqn, funcs = c("CI01", "SE86", "TO92"))
+sort_plot1(seqn, funcs = c("CI01", "SE86", "QuickSortH", "QuickSortL"))
 
