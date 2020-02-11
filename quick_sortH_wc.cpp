@@ -20,10 +20,9 @@ int partition(NumericVector a,int start,int end)
 		} while (pivot < a[j]);
 
 		if(i >= j)
-			return j;
-
-		//special.Swap(a, i, j);
-		std::swap(a[i], a[j]);
+		  return j;
+    
+    std::swap(a[i], a[j]);
 	}
 }
 
