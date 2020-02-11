@@ -15,15 +15,7 @@ TO92 <- function(s){
 }
 
 CI01 <- function(s){
-  gap <- c(1, 4, 10, 23, 57, 132, 301, 701, 1750)
-  x = 1750;
-  while(TRUE){
-    if(x > length(s)){
-      break
-    }
-    x <- floor(gap[length(gap)] * 2.25)
-    gap <- c(gap, x)
-  }
+  gap <- c(1, 4, 10, 23, 57, 132, 301, 701, 1750, 3937, 8858, 19930, 44842, 100894, 227011, 510774, 1149241, 2585792, 5818032)
   ShellSort(s, Gaps = gap)
 }
 
