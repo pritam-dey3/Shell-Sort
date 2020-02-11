@@ -15,11 +15,8 @@ public:
   
   void Swap(NumericVector arr, int i, int j){
     nswap++;
-    int temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
+    std::swap(arr[i], arr[j]);
   }
-  
   Special(){
     nswap = 0;
     ncomp = 0;
@@ -29,7 +26,7 @@ public:
 
 int partition(NumericVector a,int start,int end, Special& special)
 {
-	int pivot = a[end];
+	int pivot = a[start];
 	int i = start - 1;
 	int j = end + 1;
 	//Rcout << a <<"\n";
@@ -56,8 +53,8 @@ void qsort(NumericVector a,int start,int end, Special& special)
   {
     int P_index = partition(a, start, end, special);
     //Rcout << a <<"; swap: " << special.nswap << "; com: " << special.ncomp << "\n";
-    qsort(a, start, P_index - 1, special);
-    qsort(a, P_index,end, special);
+    qsort(a, start, P_index, special);
+    qsort(a, P_index+1,end, special);
   }
 }
 
