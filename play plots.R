@@ -16,8 +16,8 @@ avg <- function(funcs = list(), r1=20, r2=20, l = 100){
   colMeans(y[-1,])
 }
 
-sort_plot <- function(k1=3, k2=5, r1=20, r2=5, funcs = c("SE86", "TO92", "CI01")){
-  itr <- sapply(k1:k2, function (x) 5^x)
+sort_plot <- function(seqn, r1=20, r2=5, funcs = c("SE86", "TO92", "CI01")){
+  itr <- sapply(seqn, function (x) 5^x)
   y <- numeric(length(funcs))
   names(y) <- funcs
   for (i in itr) {
@@ -34,7 +34,7 @@ sort_plot <- function(k1=3, k2=5, r1=20, r2=5, funcs = c("SE86", "TO92", "CI01")
       collapse="+"),
     "~itr")
   
-  write.csv(D, sprintf("data/time-%s-%d-%d.csv", paste(funcs, collapse = "+"), k1, k2))
+  write.csv(D, sprintf("data/time -- %s -- %s.csv", paste(funcs, collapse = "+"), paste(seqn, collapse = "-")))
   
   xyplot(as.formula(frml), data = D, 
          type=c('p', 'l'),
@@ -44,7 +44,7 @@ sort_plot <- function(k1=3, k2=5, r1=20, r2=5, funcs = c("SE86", "TO92", "CI01")
 }
 
 
-sort_plot(k1=3, k2=5, funcs = c("QuickSortH_WC", "RQsort"))
+sort_plot(3:6, funcs = c("QuickSortH_WC", "QuickSortL_WC", "CI01", "SE86"))
 
 RQsort <- function(x) sort(x, method="quick")
 avg()
