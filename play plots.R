@@ -47,6 +47,3 @@ sort_plot <- function(seqn, r1=20, r2=5, funcs = c("SE86", "TO92", "CI01")){
 sort_plot(3:6, funcs = c("QuickSortH_WC", "QuickSortL_WC", "CI01", "SE86"))
 
 RQsort <- function(x) sort(x, method="quick")
-avg()
-
-f <- function(x) x+2
