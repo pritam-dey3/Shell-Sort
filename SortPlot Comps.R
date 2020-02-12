@@ -3,13 +3,13 @@ library(lattice)
 library(microbenchmark)
 
 ## plot number of comparisons per log2nfact
-avg1 <- function(funcs = list(), r1=20, l = 100){
+avg1 <- function(funcs = list(), r1=20, l = 100, measure=2){
   y <- numeric(length(funcs))
   names(y) <- funcs
   avg = numeric(4)
   for (i in 1:r1) {
     s <- sample(1:l)
-    comps = sapply(funcs, function(x) get(x)(s)[2])
+    comps = sapply(funcs, function(x) get(x)(s)[measure])
     y <- rbind(y, comps)
   }
   
@@ -17,15 +17,14 @@ avg1 <- function(funcs = list(), r1=20, l = 100){
   colMeans(y[-1,]) / log2nfact
 }
 
-avg1(c("CI01", "SE86"))
-
-sort_plot1 <- function(seqn, r1=20, funcs = c("SE86", "TO92", "CI01")){
+#[measure] decides wheather to count number of swaps(1) or comparisons(2)
+sort_plot1 <- function(seqn, r1=20, funcs = c("SE86", "TO92", "CI01"), measure=2){
   itr <- sapply(seqn, function (x) floor(10^x))
   y <- numeric(length(funcs))
   names(y) <- funcs
   for (i in itr) {
     y <- rbind(y, 
-      avg1(funcs, r1, l=i)
+      avg1(funcs, r1, l=i, measure)
     )
     print(i)
   }
@@ -37,7 +36,7 @@ sort_plot1 <- function(seqn, r1=20, funcs = c("SE86", "TO92", "CI01")){
       collapse="+"),
     "~itr")
   
-  write.csv(D, sprintf("data/time -- %s -- %f, %f.csv", paste(funcs, collapse = " + "), seqn[1], seqn[length(seqn)]))
+  write.csv(D, sprintf("data/count(%d) -- %s -- %f, %f.csv", measure, paste(funcs, collapse = " + "), seqn[1], seqn[length(seqn)]))
   
   xyplot(as.formula(frml), data = D, 
          type=c('p', 'l'),
@@ -47,5 +46,7 @@ sort_plot1 <- function(seqn, r1=20, funcs = c("SE86", "TO92", "CI01")){
 }
 
 seqn = seq(from=2, to=6, length=15)
-sort_plot1(seqn, funcs = c("CI01", "SE86", "QuickSortH", "QuickSortL"))
+sort_plot1(seqn, funcs = c("QuickSortH", "QuickSortL", "CI01", "TO92", "SE86"))
+
+sort_plot1(seqn, funcs = c("QuickSortH", "QuickSortL", "CI01", "TO92", "SE86"), measure = 1)
 
