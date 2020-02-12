@@ -13,9 +13,7 @@ public:
   
   void Swap(NumericVector arr, int i, int j){
     nswap++;
-    int temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
+    std::swap(arr[i], arr[j]);
   }
   
   Special(){
