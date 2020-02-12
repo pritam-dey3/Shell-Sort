@@ -5,14 +5,15 @@ D2 <- read.csv("data/time -- QuickSortH_WC+QuickSortL_WC+CI01+SE86 -- 5.142857, 
 
 D <- rbind(D1, D2)
 
+yvars <- head(names(D), -1)
+
 frml = paste(
-  paste(
-    names(D)[-dim(D)[2]], 
+  paste(sprintf("I(%s / (itr*log(itr)))", yvars),
     collapse="+"),
   "~itr")
 
 xyplot(as.formula(frml), data = D, 
        type=c('p', 'l'),
        auto.key = TRUE,
-       scales = list(x=list(log = 10))
+       scales = list(y = list(log=10),x=list(log = 10))
 )
