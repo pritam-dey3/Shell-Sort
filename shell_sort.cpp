@@ -3,7 +3,7 @@ using namespace Rcpp;
 
 class Special{
 public:
-  int nswap;
+  int nassign;
   int ncomp;
   
   bool Less(int a, int b){
@@ -11,15 +11,12 @@ public:
     return a <= b;
   }
   
-  void Swap(NumericVector arr, int i, int j){
-    nswap++;
-    int temp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = temp;
+  void Assignment(){
+    nassign++;
   }
   
   Special(){
-    nswap = 0;
+    nassign = 0;
     ncomp = 0;
   }
   
@@ -39,14 +36,16 @@ NumericVector ShellSort(NumericVector arr, NumericVector Gaps) {
       for(i = j-gap; i>=0; i -= gap) {
         if(special.Less(arr[i], key))
           break;
-        else
+        else{
           arr[i+gap] = arr[i];
+          special.Assignment();
+        }
       }
       arr[i+gap] = key;
     }
   }
   NumericVector res(2);
-  res[0] = special.nswap;
+  res[0] = special.nassign;
   res[1] = special.ncomp;
   //Rcout << arr << "\n";
   return res;
